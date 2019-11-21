@@ -1,0 +1,36 @@
+// E_ERROR example - running out of memory.
+ini_set('memory_limit', '1K');
+var_dump((object) range(0, 1000));
+
+// E_PARSE error - bad syntax.
+echo 'fail'
+
+if (TRUE) {
+  echo 'fail';
+
+// E_NOTICE - typically accessing something undefined.
+var_dump($array);
+$array = array();
+var_dump($array[0]);
+$object = new stdClass();
+var_dump($object->property);
+
+// E_STRICT - mixing scopes.
+class Strict {
+  function trigger() {
+    echo 'Triggered';
+  }
+}
+Strict::trigger();
+
+// E_DEPRECATED - something will be removed soon.
+// -- New object by reference.
+$deprecated = & new stdClass();
+var_dump($deprecated);
+// -- Split function.
+var_dump(split(',', 'one,two,three'));
+
+// User triggered errors.
+trigger_error('Custom notice', E_USER_NOTICE);
+trigger_error('Custom warning', E_USER_WARNING);
+trigger_error('Custom fatal error', E_USER_ERROR);
